@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <Resource id="connection" type="javax.sql.DataSource">#Fri Mar 05 21:45:15 CST 2021
+jdbcDriver=com.mysql.jdbc.Driver
+password=x40Gql5uR4bur62SpOl0
+userName=ujwcfexevk5sguer
+jdbcUrl=jdbc\:mysql\://bh1spn6qfrowu0x7vq87-mysql.services.clever-cloud.com\:3306/bh1spn6qfrowu0x7vq87?zeroDateTimeBehavior\=convertToNull
+</Resource>
+  <Resource id="MySql" type="javax.sql.DataSource">#Fri Mar 05 22:19:55 CST 2021
+jdbcDriver=com.mysql.jdbc.Driver
+password=x40Gql5uR4bur62SpOl0
+userName=ujwcfexevk5sguer
+jdbcUrl=jdbc\:mysql\://bh1spn6qfrowu0x7vq87-mysql.services.clever-cloud.com\:3306/bh1spn6qfrowu0x7vq87?zeroDateTimeBehavior\=convertToNull
+</Resource>
+</resources>

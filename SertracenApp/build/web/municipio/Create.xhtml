@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MunicipioCreateDlg" widgetVar="MunicipioCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMunicipioTitle}">
+            <h:form id="MunicipioCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{municipioController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateMunicipioLabel_idMunicipio}" for="idMunicipio" />
+                        <p:inputText id="idMunicipio" value="#{municipioController.selected.idMunicipio}" title="#{bundle.CreateMunicipioTitle_idMunicipio}" required="true" requiredMessage="#{bundle.CreateMunicipioRequiredMessage_idMunicipio}"/>
+                        <p:outputLabel value="#{bundle.CreateMunicipioLabel_nombreMunicipio}" for="nombreMunicipio" />
+                        <p:inputText id="nombreMunicipio" value="#{municipioController.selected.nombreMunicipio}" title="#{bundle.CreateMunicipioTitle_nombreMunicipio}" />
+                        <p:outputLabel value="#{bundle.CreateMunicipioLabel_idDepartamentoFK}" for="idDepartamentoFK" />
+                        <p:selectOneMenu id="idDepartamentoFK" value="#{municipioController.selected.idDepartamentoFK}" >
+                            <f:selectItems value="#{departamentoController.itemsAvailableSelectOne}"
+                                           var="idDepartamentoFKItem"
+                                           itemLabel="#{idDepartamentoFKItem.nombreDepartamento}"
+                                           itemValue="#{idDepartamentoFKItem}"/>
+                            <!-- Agregar itemLabel para mostrar los nombres-->
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{municipioController.create}" value="#{bundle.Save}" update="display,:MunicipioListForm:datalist,:growl" oncomplete="handleSubmit(args,'MunicipioCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MunicipioCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

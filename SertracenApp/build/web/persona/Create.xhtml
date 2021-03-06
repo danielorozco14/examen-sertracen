@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonaCreateDlg" widgetVar="PersonaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePersonaTitle}">
+            <h:form id="PersonaCreateForm" enctype="multipart/form-data">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_nombres}" for="nombres" />
+                        <p:inputText id="nombres" value="#{personaController.selected.nombres}" title="#{bundle.CreatePersonaTitle_nombres}" />
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_apellidos}" for="apellidos" />
+                        <p:inputText id="apellidos" value="#{personaController.selected.apellidos}" title="#{bundle.CreatePersonaTitle_apellidos}" />
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_fechaNacimiento}" for="fechaNacimiento" />
+                        <p:calendar id="fechaNacimiento" pattern="MM/dd/yyyy" value="#{personaController.selected.fechaNacimiento}" title="#{bundle.EditPersonaTitle_fechaNacimiento}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_dui}" for="dui" />
+                        <p:inputText id="dui" value="#{personaController.selected.dui}" title="#{bundle.CreatePersonaTitle_dui}" required="true" requiredMessage="#{bundle.CreatePersonaRequiredMessage_dui}"/>
+                       
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_residencia}" for="residencia" />
+                        <p:inputText id="residencia" value="#{personaController.selected.residencia}" title="#{bundle.CreatePersonaTitle_residencia}" />
+                        
+                        
+                        <!--p:inputText value="#{personaController.selected.foto}" title="#{bundle.CreatePersonaTitle_foto}"/-->
+                        
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_foto}" for="foto" />
+                        
+                        <p:fileUpload id="foto" value="#{personaController.file}" mode="advanced"
+                                      fileUploadListener="#{personaController.upload()}"/>
+                                           
+                        <p:growl showDetail="true"/>
+                        
+                        
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_municipioFK}" for="municipioFK" />
+                        <p:selectOneMenu id="municipioFK" value="#{personaController.selected.municipioFK}" >
+                            <f:selectItems value="#{municipioController.itemsAvailableSelectOne}"
+                                           var="municipioFKItem"
+                                           itemLabel="#{municipioFKItem.nombreMunicipio}"
+                                           itemValue="#{municipioFKItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{personaController.create}" value="#{bundle.Save}" update="display,:PersonaListForm:datalist,:growl" oncomplete="handleSubmit(args,'PersonaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PersonaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

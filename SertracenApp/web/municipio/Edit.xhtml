@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MunicipioEditDlg" widgetVar="MunicipioEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditMunicipioTitle}">
+            <h:form id="MunicipioEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{municipioController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditMunicipioLabel_idMunicipio}" for="idMunicipio" />
+                        <p:inputText id="idMunicipio" value="#{municipioController.selected.idMunicipio}" title="#{bundle.EditMunicipioTitle_idMunicipio}" required="true" requiredMessage="#{bundle.EditMunicipioRequiredMessage_idMunicipio}"/>
+                        <p:outputLabel value="#{bundle.EditMunicipioLabel_nombreMunicipio}" for="nombreMunicipio" />
+                        <p:inputText id="nombreMunicipio" value="#{municipioController.selected.nombreMunicipio}" title="#{bundle.EditMunicipioTitle_nombreMunicipio}" />
+                        <p:outputLabel value="#{bundle.EditMunicipioLabel_idDepartamentoFK}" for="idDepartamentoFK" />
+                        <p:selectOneMenu id="idDepartamentoFK" value="#{municipioController.selected.idDepartamentoFK}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{departamentoController.itemsAvailableSelectOne}"
+                                           var="idDepartamentoFKItem"
+                                           itemValue="#{idDepartamentoFKItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{municipioController.update}" value="#{bundle.Save}" update="display,:MunicipioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MunicipioEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MunicipioEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
