@@ -22,13 +22,18 @@
                         <p:inputText id="dui" value="#{personaController.selected.dui}" title="#{bundle.EditPersonaTitle_dui}" required="true" requiredMessage="#{bundle.EditPersonaRequiredMessage_dui}"/>
                         <p:outputLabel value="#{bundle.EditPersonaLabel_residencia}" for="residencia" />
                         <p:inputText id="residencia" value="#{personaController.selected.residencia}" title="#{bundle.EditPersonaTitle_residencia}" />
-                        <p:outputLabel value="#{bundle.EditPersonaLabel_foto}" for="foto" />
-                        <p:inputTextarea rows="4" cols="30" id="foto" value="#{personaController.selected.foto}" title="#{bundle.EditPersonaTitle_foto}" />
+                        <p:outputLabel value="#{bundle.CreatePersonaLabel_foto}" for="foto" />
+                        
+                        <p:fileUpload id="foto" value="#{personaController.file}" mode="advanced"
+                                      fileUploadListener="#{personaController.upload()}"/>
+                                           
+                        <p:growl showDetail="true"/>
                         <p:outputLabel value="#{bundle.EditPersonaLabel_municipioFK}" for="municipioFK" />
                         <p:selectOneMenu id="municipioFK" value="#{personaController.selected.municipioFK}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{municipioController.itemsAvailableSelectOne}"
                                            var="municipioFKItem"
+                                           itemLabel="#{municipioFKItem.nombreMunicipio}"
                                            itemValue="#{municipioFKItem}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>

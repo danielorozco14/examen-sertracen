@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="05c3bc8d-ddb3-451b-8374-b57e36e72b32">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="madeBy" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nombres" class="java.lang.String"/>
+	<field name="apellidos" class="java.lang.String"/>
+	<field name="dui" class="java.lang.String"/>
+	<field name="residencia" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="163" y="0" width="228" height="36" uuid="025fd5ab-f585-46ef-b642-f74ad6754d1d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20"/>
+				</textElement>
+				<text><![CDATA[REPORTE MAR 2021]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="59" width="100" height="20" uuid="651b3098-2a67-43a4-87a0-8a7c5c00172f"/>
+				<text><![CDATA[Hecho por: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="127" y="59" width="100" height="20" uuid="9c10a4b0-8900-438d-9984-6d5c06e89944"/>
+				<textFieldExpression><![CDATA[$P{madeBy}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="55" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="25" width="100" height="20" uuid="12593cd3-768f-4e9e-b943-230850b60e9e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[DUI]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="121" y="25" width="100" height="20" uuid="911c6766-6d8b-402d-b26e-0aa97ad57f98"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[NOMBRES]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="263" y="25" width="100" height="20" uuid="a4c4cc41-4725-48c9-acec-3244d2e9a294"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[APELLIDOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="426" y="25" width="100" height="20" uuid="8d8a4fd9-59da-4824-ac3a-320e0f0c7bdb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[RESIDENCIA]]></text>
+			</staticText>
+			<line>
+				<reportElement x="2" y="50" width="553" height="1" uuid="6ef65a49-2579-423e-bb8b-cd92f1eaf0f3"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="71" splitType="Stretch">
+			<textField>
+				<reportElement x="120" y="0" width="100" height="30" uuid="878f09d9-6633-47bb-a2fe-4a4e0ff3a642"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombres}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="0" width="80" height="30" uuid="59cac260-83ac-4184-99f6-21f74552a929"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dui}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="263" y="0" width="112" height="30" uuid="62c2cf73-7983-47ca-8878-40031688070b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{apellidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="426" y="0" width="108" height="30" uuid="488a5afe-e0b0-44cc-9c82-5f8bd6d47806"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{residencia}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="100" y="0" width="1" height="30" uuid="410b925f-246c-4626-b1ed-1735cd7403f3"/>
+			</line>
+			<line>
+				<reportElement x="231" y="0" width="1" height="30" uuid="481964a0-e9fa-43b5-839c-0305f0149022"/>
+			</line>
+			<line>
+				<reportElement x="401" y="0" width="1" height="30" uuid="fbcc1b8d-f35d-4e68-a3f3-1a855296f418"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

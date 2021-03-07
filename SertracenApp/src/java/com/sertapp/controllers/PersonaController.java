@@ -3,10 +3,14 @@ package com.sertapp.controllers;
 import com.sertapp.models.Persona;
 import com.sertapp.controllers.util.JsfUtil;
 import com.sertapp.controllers.util.JsfUtil.PersistAction;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,7 +23,16 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.faces.event.ActionEvent;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.apache.commons.io.IOUtils;
+
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 
@@ -31,7 +44,8 @@ public class PersonaController implements Serializable {
     private com.sertapp.controllers.PersonaFacade ejbFacade;
     private List<Persona> items = null;
     private Persona selected;
-    private byte uploadResult [] = new byte[1024];
+    UploadedFile file;
+    public byte uploadResult[] = new byte[2048];
 
     public byte[] getUploadResult() {
         return uploadResult;
@@ -40,45 +54,67 @@ public class PersonaController implements Serializable {
     public void setUploadResult(byte[] uploadResult) {
         this.uploadResult = uploadResult;
     }
-    
-    UploadedFile file;
 
     public UploadedFile getFile() {
         return file;
     }
 
     public void setFile(UploadedFile file) {
+
         this.file = file;
     }
 
-       
+    public void report(ActionEvent event) throws JRException, IOException {
+        
+        Map<String, Object> parametros = new HashMap<String, Object>() ;
+        parametros.put("madeBy", "Daniel Orozco");
+        List<Persona> items = null;
+        items = getFacade().findAll();
+        File jasper = new File(FacesContext.getCurrentInstance().getExternalContext().getRealPath("/report.jasper"));
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasper.getPath(), parametros,
+                new JRBeanCollectionDataSource(items));
+        
+        HttpServletResponse response = (HttpServletResponse)FacesContext.getCurrentInstance()
+                .getExternalContext().getResponse();
+        
+        response.addHeader("Content-disposition", "attachment; filename= Reporte.pdf");
+        
+        ServletOutputStream stream = response.getOutputStream();
+        
+        JasperExportManager.exportReportToPdfStream(jasperPrint, stream);
+        
+        stream.flush();
+        stream.close();
+        FacesContext.getCurrentInstance().responseComplete();
+        
+    }
+
     public PersonaController() {
     }
 
-    
     //Function for img upload
-    public void upload(){
-        try{
-            if(file!= null){
-                InputStream is = file.getInputstream();
-                uploadResult=(IOUtils.toByteArray(is));
-                
-                FacesMessage mssg = new FacesMessage("Archivo ", file.getFileName() + "subido exitosamente!");
-                FacesContext.getCurrentInstance().addMessage(null, mssg);
-            }
-        }catch(Exception e){
+    public void upload() {
+        try {
+
+            String fileName = file.getFileName();
+            String contentType = file.getContentType();
+            InputStream input = file.getInputstream();
+            uploadResult = IOUtils.toByteArray(input);
+            FacesMessage mssg = new FacesMessage("Archivo ", file.getFileName() + "subido exitosamente!");
+            FacesContext.getCurrentInstance().addMessage(null, mssg);
+
+        } catch (Exception e) {
             FacesMessage mssg = new FacesMessage("Hubo un error...");
             FacesContext.getCurrentInstance().addMessage(null, mssg);
-        }    
-                
-    }   
-        
-    
+        }
+
+    }
+
     public Persona getSelected() {
         return selected;
     }
 
-    public void setSelected(Persona selected) {       
+    public void setSelected(Persona selected) {
         this.selected = selected;
     }
 

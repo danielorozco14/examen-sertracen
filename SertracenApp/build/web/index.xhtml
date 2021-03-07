@@ -1,21 +1,34 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Facelet Title</title>
         <h:outputStylesheet name="css/jsfcrud.css"/>
     </h:head>
     <h:body>
-        Hello from Facelets
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-        <br />
-        <h:link outcome="/departamento/List" value="Show All Departamento Items"/>
-        <br />
-        <h:link outcome="/municipio/List" value="Show All Municipio Items"/>
-        <br />
-        <h:link outcome="/persona/List" value="Show All Persona Items"/>
+        Hecho por Daniel Alejandro Orozco (daniel.orozco65@outlook.com)
+
+
+        <h:form>
+            <p:growl id="messages" showDetail="true"/>
+
+            <div class="card" style="width: 450px">
+                <h3 style="vertical-align: bottom">Aplicacion para control de documentos de identidad</h3>
+                <p:menu>
+                    <p:submenu label="Menu">
+                        <p:menuitem value="Ver Personas" outcome="/persona/List"
+                                    icon="pi pi-save"/>
+                        <p:menuitem value="Ver Departamentos" outcome="/departamento/List" icon="pi pi-refresh"/>
+                        <p:menuitem value="Ver Municipios" outcome="/municipio/List"  icon="pi pi-times"/>
+                    </p:submenu>
+                    
+                </p:menu>
+            </div>
+
+        </h:form>
+
     </h:body>
 
 
